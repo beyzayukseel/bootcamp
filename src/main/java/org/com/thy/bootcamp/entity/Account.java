@@ -24,7 +24,7 @@ public class Account {
     @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate createdDate;
 
-    private UUID iban;
+    private String iban;
 
     @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate modifiedDate;
