@@ -9,6 +9,7 @@ import java.time.LocalDate;
 @Entity
 @Setter
 @Getter
+@Table(name = "LINK_GENERATOR")
 public class LinkGenerator {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

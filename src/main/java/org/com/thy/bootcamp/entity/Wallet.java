@@ -11,6 +11,7 @@ import java.util.List;
 @Entity
 @Setter
 @Getter
+@Table(name = "WALLET")
 public class Wallet {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

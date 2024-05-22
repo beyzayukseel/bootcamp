@@ -12,6 +12,7 @@ import java.util.UUID;
 @Entity
 @Setter
 @Getter
+@Table(name = "TRANSACTION")
 public class Transaction {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

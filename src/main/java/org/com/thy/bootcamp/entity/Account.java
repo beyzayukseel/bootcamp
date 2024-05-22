@@ -7,11 +7,11 @@ import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.UUID;
 
 @Entity
 @Setter
 @Getter
+@Table(name = "ACCOUNT")
 public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,7 +19,7 @@ public class Account {
 
     private String accountNumber;
     private String bankCode;
-    private BigDecimal balance= BigDecimal.ZERO;
+    private BigDecimal balance = BigDecimal.ZERO;
 
     @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate createdDate;
@@ -41,10 +41,9 @@ public class Account {
     @JoinColumn(name = "wallet_id")
     private Wallet wallet;
 
-    @OneToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "card_id")
     private Card card;
 
     private Boolean isDeleted;
-
 }
