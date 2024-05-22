@@ -4,6 +4,7 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.com.thy.bootcamp.entity.*;
+import org.com.thy.bootcamp.exception.ServiceOperationException;
 import org.com.thy.bootcamp.exception.ValidationOperationException;
 import org.com.thy.bootcamp.model.AccountRequestDto;
 import org.com.thy.bootcamp.repository.AccountRepository;
@@ -12,9 +13,12 @@ import org.com.thy.bootcamp.repository.UserRepository;
 import org.com.thy.bootcamp.util.GeneralNumberGenerator;
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -23,7 +27,6 @@ public class AccountService {
 
     private final AccountRepository accountRepository;
     private final UserRepository userRepository;
-    private final CardRepository cardRepository;
 
     @Transactional
     public void createAccount(AccountRequestDto accountRequestDto) {
@@ -43,22 +46,40 @@ public class AccountService {
         account.setIban("TR" + GeneralNumberGenerator.randomNumber());
         account.setUser(user);
 
-        Boolean checkCustomerHasAccount = accountRepository.existsByUserId(accountRequestDto.userId());
-
-        accountRepository.save(account);
-
-        if (Boolean.FALSE.equals(checkCustomerHasAccount)) { // if customer demand for first account, define a card default
-                Card card = new Card();
-                card.setCardStatus(CardStatus.PENDING);
-                card.setIsDeleted(Boolean.FALSE);
-                card.setBoundary(BigDecimal.ZERO);
-                card.setCardNumber(GeneralNumberGenerator.randomNumber());
-                card.setDebt(BigDecimal.ZERO);
-                account.setCard(card);
-            cardRepository.save(card);
-        }
         accountRepository.save(account);
     }
 
+    public Account getAccountById(Long id) {
+        Account account = accountRepository.findById(id)
+                .orElseThrow(() -> new ServiceOperationException.NotFoundException("Account not found"));
+        AccountStatus accountStatus = account.getAccountStatus();
+        if (!(accountStatus == AccountStatus.APPROVED)) {
+            throw new ServiceOperationException.NotValidException("Account is not valid for use");
+        }
+        log.info("Account ID -> {} date: {} getting", account.getId(), new Date());
+
+        return account;
+
+    }
+
+    public List<Account> getAccountsByCustomerId(Long userId) {
+        return new ArrayList<>(accountRepository.getAccountsByUserId(userId));
+    }
+
+    public void saveAccount(Account account) {
+        accountRepository.save(account);
+    }
+
+    public Boolean existAccountById(Long accountId) {
+        return accountRepository.existsById(accountId);
+    }
+
+    public Boolean exitsByIban(String iban){
+        return accountRepository.existsByIban(iban);
+    }
+
+    public Account findByIban(String iban){
+        return accountRepository.findByIban(iban);
+    }
 
 }

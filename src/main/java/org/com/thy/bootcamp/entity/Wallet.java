@@ -22,7 +22,14 @@ public class Wallet {
 
     private BigDecimal totalAmount;
 
+    private String ibanNumber;
+
     private LocalDate created;
+
+    private String currency;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    private User leader; //leader (main user) of group wallet
 
     @OneToMany(mappedBy = "wallet", cascade = CascadeType.ALL)
     private List<Account> accountList;

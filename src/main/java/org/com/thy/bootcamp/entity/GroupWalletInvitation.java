@@ -10,7 +10,7 @@ import java.time.LocalDate;
 @Setter
 @Getter
 @Table(name = "LINK_GENERATOR")
-public class LinkGenerator {
+public class GroupWalletInvitation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

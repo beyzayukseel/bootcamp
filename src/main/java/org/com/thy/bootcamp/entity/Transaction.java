@@ -2,6 +2,7 @@ package org.com.thy.bootcamp.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -12,7 +13,6 @@ import java.util.UUID;
 @Entity
 @Setter
 @Getter
-@Table(name = "TRANSACTION")
 public class Transaction {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,9 +21,9 @@ public class Transaction {
     @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate createdDate;
 
-    private UUID sourceIbanNumber;
+    private String sourceIbanNumber;
 
-    private UUID destinationIbanNumber;
+    private String destinationIbanNumber;
 
     private BigDecimal amount;
 

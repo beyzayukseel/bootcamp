@@ -6,4 +6,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface WalletRepository extends JpaRepository<Wallet, Long> {
+    boolean existsByIbanNumber(String iban);
+
+    Wallet findByIbanNumber(String iban);
 }
