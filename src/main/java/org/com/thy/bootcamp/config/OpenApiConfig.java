@@ -10,7 +10,7 @@ public class OpenApiConfig {
     @Bean
     public OpenAPI openAPI() {
         return new OpenAPI()
-                .info(new Info().title("Simpra Case Study")
+                .info(new Info().title("THY Fintech Bootcamp-GROUP WALLET")
                         .description("")
                         .version("1.0")
                 );
