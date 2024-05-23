@@ -1,7 +1,6 @@
 package org.com.thy.bootcamp.service;
 
 import jakarta.transaction.Transactional;
-import jakarta.validation.ValidationException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.com.thy.bootcamp.entity.*;
@@ -10,7 +9,6 @@ import org.com.thy.bootcamp.exception.ValidationOperationException;
 import org.com.thy.bootcamp.model.CreateTransactionRequestDto;
 import org.com.thy.bootcamp.model.ExchangeDto;
 import org.com.thy.bootcamp.model.TransactionDetails;
-import org.com.thy.bootcamp.repository.MilPointRepository;
 import org.com.thy.bootcamp.repository.TransactionRepository;
 import org.com.thy.bootcamp.repository.WalletRepository;
 import org.springframework.http.ResponseEntity;
