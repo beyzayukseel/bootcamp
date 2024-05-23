@@ -2,6 +2,7 @@ package org.com.thy.bootcamp.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.com.thy.bootcamp.entity.GroupWalletInvitation;
+import org.com.thy.bootcamp.model.JoinGroupWalletRequestDto;
 import org.com.thy.bootcamp.model.SendInvitationLinkRequest;
 import org.com.thy.bootcamp.service.GroupWalletInvitationService;
 import org.com.thy.bootcamp.util.SystemResponse;
@@ -19,6 +20,11 @@ public class GroupWalletInvitationController {
     @PostMapping
     public ResponseEntity<SystemResponse> sendGroupWalletInvitationLink(@RequestBody SendInvitationLinkRequest request) {
        return groupWalletInvitationService.sendGroupWalletInvitationLink(request);
+    }
+
+    @PostMapping("/join")
+    public ResponseEntity<SystemResponse> joinGroupWalletWithInvitationLink(@RequestBody JoinGroupWalletRequestDto requestDto) {
+        return groupWalletInvitationService.joinGroupWalletWithInvitationLink(requestDto);
     }
 
     @GetMapping("/{id}")

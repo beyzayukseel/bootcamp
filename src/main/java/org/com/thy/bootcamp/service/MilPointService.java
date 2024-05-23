@@ -15,7 +15,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class MilPointService {
 
-
     private final MilPointRepository milPointRepository;
 
     private final WalletRepository walletRepository;

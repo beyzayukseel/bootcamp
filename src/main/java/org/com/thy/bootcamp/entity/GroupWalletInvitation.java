@@ -15,7 +15,7 @@ public class GroupWalletInvitation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String linkUrl;
+    private String linkUrl; //unique
 
     @OneToOne
     private User groupLeader;
