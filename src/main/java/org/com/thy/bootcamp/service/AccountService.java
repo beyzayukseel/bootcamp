@@ -14,10 +14,7 @@ import org.com.thy.bootcamp.util.GeneralNumberGenerator;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -27,6 +24,8 @@ public class AccountService {
 
     private final AccountRepository accountRepository;
     private final UserRepository userRepository;
+    private final CardRepository cardRepository;
+    private final CardService cardService;
 
     @Transactional
     public void createAccount(AccountRequestDto accountRequestDto) {
@@ -80,6 +79,21 @@ public class AccountService {
 
     public Account findByIban(String iban){
         return accountRepository.findByIban(iban);
+    }
+
+    public Account createCardForAccount(Long accountId, Card card) {
+        Optional<Account> accountOptional = accountRepository.findById(accountId);
+
+        if (accountOptional.isPresent()) {
+            Account account = accountOptional.get();
+            card.setAccountList(account);
+            card.setCardNumber(cardService.generateUniqueCardNumber());
+            Card savedCard = cardRepository.save(card);
+            account.setCard(savedCard);
+            return accountRepository.save(account);
+        } else {
+            throw new RuntimeException("Account not found");
+        }
     }
 
 }

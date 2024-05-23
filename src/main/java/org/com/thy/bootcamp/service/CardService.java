@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 
 @RequiredArgsConstructor
 @Service
@@ -17,7 +18,25 @@ public class CardService {
 
 
     public Card createCard(Card card) {
+        card.setCardNumber(generateUniqueCardNumber());
         return cardRepository.save(card);
+    }
+
+    public String generateUniqueCardNumber() {
+        String cardNumber;
+        do {
+            cardNumber = generateRandomCardNumber();
+        } while (cardRepository.existsByCardNumber(cardNumber));
+        return cardNumber;
+    }
+
+    private String generateRandomCardNumber() {
+        Random random = new Random();
+        StringBuilder cardNumber = new StringBuilder();
+        for (int i = 0; i < 16; i++) {
+            cardNumber.append(random.nextInt(10));
+        }
+        return cardNumber.toString();
     }
 
 

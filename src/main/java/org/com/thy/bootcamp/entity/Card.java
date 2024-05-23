@@ -15,7 +15,10 @@ public class Card {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(unique = true)
     private String cardNumber;
+
     private BigDecimal boundary=BigDecimal.ZERO;
     private BigDecimal debt = BigDecimal.ZERO;
     private Boolean isDeleted;
@@ -27,4 +30,7 @@ public class Card {
     @OneToOne
     private Account accountList;
 
+    public void setDeleted(boolean b) {
+
+    }
 }
