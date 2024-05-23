@@ -2,11 +2,12 @@ package org.com.thy.bootcamp.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.com.thy.bootcamp.entity.Account;
-import org.com.thy.bootcamp.entity.Wallet;
-import org.com.thy.bootcamp.entity.WalletType;
+import org.com.thy.bootcamp.entity.*;
 import org.com.thy.bootcamp.exception.ValidationOperationException;
+import org.com.thy.bootcamp.model.AllTransactionsAndPayments;
 import org.com.thy.bootcamp.model.GroupWalletRequestDto;
+import org.com.thy.bootcamp.model.PaymentDetails;
+import org.com.thy.bootcamp.model.TransactionDetails;
 import org.com.thy.bootcamp.repository.AccountRepository;
 import org.com.thy.bootcamp.repository.WalletRepository;
 import org.com.thy.bootcamp.util.SystemResponse;
@@ -48,4 +49,21 @@ public class WalletService {
     }
 
 
+    public AllTransactionsAndPayments getAllOperationsOfWallet(Long groupWalletId) {
+        Wallet wallet = walletRepository.findById(groupWalletId).orElseThrow(() ->
+                new ValidationOperationException.IdNotValidator("Wallet couldn't find"));
+
+        List<Payment> allPaymentsToWallet = wallet.getPaymentList();
+
+        List<PaymentDetails> allPayments = allPaymentsToWallet.stream().map(it ->
+                new PaymentDetails(wallet.getLeader().getName(), wallet.getLeader().getLastname(),
+                        it.getCreated(), it.getAmount(), it.getReceiver().getCompanyName())).toList();
+
+        List<Transaction> allTransactionsToWallet = wallet.getTransactionList();
+         List<TransactionDetails> allTransactions = allTransactionsToWallet.stream().map(it ->
+                new TransactionDetails(it.getAccount().getUser().getName(), it.getAccount().getUser().getLastname(),
+                        it.getCreatedDate(), it.getTransactionType(), it.getAmount())).toList();
+
+         return new AllTransactionsAndPayments(allPayments, allTransactions);
+    }
 }

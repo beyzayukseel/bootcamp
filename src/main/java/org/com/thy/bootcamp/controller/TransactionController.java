@@ -15,8 +15,8 @@ public class TransactionController {
     private final TransactionService transactionService;
 
     @PostMapping
-    public void createTransaction(@RequestBody CreateTransactionRequestDto createTransactionRequestDto) {
-        transactionService.createTransaction(createTransactionRequestDto);
+    public void createTransactionToWallet(@RequestBody CreateTransactionRequestDto createTransactionRequestDto) {
+        transactionService.createTransactionToWallet(createTransactionRequestDto);
     }
 
     @GetMapping("/all")
