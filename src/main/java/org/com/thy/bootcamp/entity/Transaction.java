@@ -25,6 +25,8 @@ public class Transaction {
 
     private BigDecimal amount;
 
+    private String transactionType;
+
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "account_id")
     private Account account;

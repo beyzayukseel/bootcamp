@@ -16,6 +16,9 @@ public class User {
     private Long id;
 
     private String customerNumber;
+
+    private String name;
+    private String lastname;
     private Boolean isDeleted;
     private String email;
 

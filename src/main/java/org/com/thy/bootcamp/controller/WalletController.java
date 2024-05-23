@@ -5,10 +5,7 @@ import org.com.thy.bootcamp.model.GroupWalletRequestDto;
 import org.com.thy.bootcamp.service.WalletService;
 import org.com.thy.bootcamp.util.SystemResponse;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/wallet")
