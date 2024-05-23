@@ -30,7 +30,7 @@ public class TransactionService {
     private final WalletRepository walletRepository;
     private final TransactionRepository transactionRepository;
     private final ExchangeModule exchangeModule;
-    private final MilPointRepository milPointRepository;
+    private final MilPointService milPointService;
 
 
     @Transactional(Transactional.TxType.REQUIRED)
@@ -77,8 +77,8 @@ public class TransactionService {
                 MilPoint milPoint = new MilPoint();
                 milPoint.setCreated(LocalDate.now());
                 milPoint.setWallet(getUserInvidicualDefaultWallet.get());
-                milPoint.setAmount(createTransactionDto.quantity());
-                milPointRepository.save(milPoint);
+                milPoint.setAmount(milPointService.checkEarnedMilePoint(createTransactionDto.quantity()));
+                milPointService.createMilPoint(milPoint);
             }
 
         } catch (Exception e) {

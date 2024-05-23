@@ -52,4 +52,12 @@ public class MilPointService {
             throw new IllegalArgumentException("MilPoint not found with id: " + id);
         }
     }
+
+    public BigDecimal checkEarnedMilePoint(BigDecimal quantity) {
+        if (quantity.compareTo(BigDecimal.valueOf(800)) > 0) {
+            return quantity.multiply(BigDecimal.valueOf(0.13));
+        } else {
+            return quantity.multiply(BigDecimal.valueOf(0.05));
+        }
+    }
 }
