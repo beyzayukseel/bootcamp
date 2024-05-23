@@ -3,7 +3,6 @@ package org.com.thy.bootcamp.service;
 import lombok.RequiredArgsConstructor;
 import org.com.thy.bootcamp.entity.Receiver;
 import org.com.thy.bootcamp.repository.ReceiverRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

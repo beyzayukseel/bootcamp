@@ -3,7 +3,6 @@ package org.com.thy.bootcamp.service;
 import lombok.RequiredArgsConstructor;
 import org.com.thy.bootcamp.entity.Card;
 import org.com.thy.bootcamp.repository.CardRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

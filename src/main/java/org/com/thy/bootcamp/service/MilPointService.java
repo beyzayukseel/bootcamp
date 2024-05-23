@@ -5,13 +5,11 @@ import org.com.thy.bootcamp.entity.MilPoint;
 import org.com.thy.bootcamp.entity.Wallet;
 import org.com.thy.bootcamp.repository.MilPointRepository;
 import org.com.thy.bootcamp.repository.WalletRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
